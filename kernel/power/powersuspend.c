@@ -304,8 +304,7 @@ static int __init power_suspend_init(void)
 		return -ENOMEM;
 	}
 
-	// Yank555.lu : Default to autosleep mode;
-	mode = POWER_SUSPEND_AUTOSLEEP;
+	mode = POWER_SUSPEND_PANEL;
 
 	return 0;
 }
