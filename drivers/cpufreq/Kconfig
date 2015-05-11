@@ -146,6 +146,15 @@ config CPU_FREQ_DEFAULT_GOV_SMARTMAX
             help
               Use the CPUFreq governor 'smartmax' as default.
 
+config CPU_FREQ_DEFAULT_GOV_HYPER
+    bool "hyper"
+    select CPU_FREQ_GOV_HYPER
+    ---help---
+    Use the CPUFreq governor 'hyper' as default. This allows
+    you to get a full dynamic cpu frequency capable system by simply
+    loading your cpufreq low-level hardware driver, using the
+    'hyper' governor for latency-sensitive workloads.
+
 config CPU_FREQ_DEFAULT_GOV_PEGASUSQ
 	bool "pegasusq"
 	select CPU_FREQ_GOV_PEGASUSQ
@@ -298,6 +307,13 @@ config CPU_FREQ_GOV_SMARTMAX
            help
              smartmax' - a "smart" optimized governor!
              If in doubt, say N.
+
+config CPU_FREQ_GOV_HYPER
+    tristate "'hyper' cpufreq governor"
+    depends on CPU_FREQ
+    ---help---
+         'hyper' - A tweaked "ondemand" based smart and smooth optimized governor!
+         If in doubt, say N.
 
 config CPU_FREQ_GOV_PEGASUSQ
 	tristate "'pegasusq' cpufreq policy governor"
