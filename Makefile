@@ -359,7 +359,7 @@ CFLAGS_KERNEL	=
 AFLAGS_KERNEL	=
 CFLAGS_GCOV	= -fprofile-arcs -ftest-coverage
 
-GEN_OPT_FLAGS := -g0 -DNDEBUG -fomit-frame-pointer -funsafe-math-optimizations
+GEN_OPT_FLAGS := -DNDEBUG
 
 # Use LINUXINCLUDE when you must reference the include/ directory.
 # Needed to be compatible with the O= option
