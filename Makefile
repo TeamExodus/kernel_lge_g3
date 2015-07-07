@@ -246,8 +246,8 @@ CONFIG_SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
 
 HOSTCC       = gcc
 HOSTCXX      = g++
-HOSTCFLAGS   = -Wall -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer
-HOSTCXXFLAGS = -O2 -fgraphite -fgraphite-identity
+HOSTCFLAGS   = -Wall -Wmissing-prototypes -Wstrict-prototypes -O3 -fomit-frame-pointer -pipe -DNDEBUG -fgcse-las
+HOSTCXXFLAGS = -pipe -DNDEBUG -O3 -fgcse-las -fgraphite -fgraphite-identity
 
 # Decide whether to build built-in, modular, or both.
 # Normally, just do built-in.
@@ -596,8 +596,6 @@ ifndef CONFIG_FUNCTION_TRACER
 KBUILD_CFLAGS	+= -fomit-frame-pointer
 endif
 endif
-
-KBUILD_CFLAGS   += $(call cc-option, -fno-var-tracking-assignments)
 
 ifdef CONFIG_DEBUG_INFO
 KBUILD_CFLAGS	+= -g
