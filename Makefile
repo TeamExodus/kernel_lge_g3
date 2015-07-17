@@ -384,7 +384,7 @@ KBUILD_CPPFLAGS := -D__KERNEL__
 KBUILD_CFLAGS   := -Wall -DNDEBUG -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -fno-strict-aliasing -fno-common \
 		   -Werror-implicit-function-declaration \
-		   -Wno-format-security -Wno-array-bounds \
+		   -Wno-format-security \
 		   -fno-delete-null-pointer-checks
 
 KBUILD_CFLAGS   += $(GRAPHITE_FLAGS)
