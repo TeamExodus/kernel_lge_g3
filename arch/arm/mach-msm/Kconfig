@@ -553,6 +553,10 @@ config ARCH_MSMSAMARIUM
 	select MSM_RUN_QUEUE_STATS
 	select ARCH_WANT_KMAP_ATOMIC_FLUSH
 	select QMI_ENCDEC
+
+config STATE_NOTIFIER
+        bool "State Notifier"
+	default y
 endmenu
 
 choice
