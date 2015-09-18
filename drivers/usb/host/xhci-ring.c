@@ -1831,6 +1831,12 @@ static int process_isoc_td(struct xhci_hcd *xhci, struct xhci_td *td,
 		frame->status = -EPROTO;
 		skip_td = true;
 		break;
+	case COMP_TX_ERR:
+		frame->status = -EPROTO;
+		if (event_trb != td->last_trb)
+			return 0;
+		skip_td = true;
+		break;
 	case COMP_STOP:
 	case COMP_STOP_INVAL:
 		break;
@@ -2425,7 +2431,7 @@ irqreturn_t xhci_irq(struct usb_hcd *hcd)
 		xhci_halt(xhci);
 hw_died:
 		spin_unlock(&xhci->lock);
-		return -ESHUTDOWN;
+		return IRQ_HANDLED;
 	}
 
 	/*
