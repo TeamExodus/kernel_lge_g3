@@ -22,6 +22,10 @@
 #include <linux/err.h>
 #include <linux/regulator/consumer.h>
 
+#ifdef CONFIG_STATE_NOTIFIER
+#include <linux/state_notifier.h>
+#endif
+
 #include "mdss.h"
 #include "mdss_panel.h"
 #include "mdss_dsi.h"
@@ -1208,7 +1212,8 @@ static int mdss_dsi_event_handler(struct mdss_panel_data *pdata,
 			rc = mdss_dsi_unblank(pdata);
 
 #ifdef CONFIG_STATE_NOTIFIER
-		state_resume();
+		if (!use_fb_notifier)
+			state_resume();
 #endif
 		break;
 	case MDSS_EVENT_BLANK:
@@ -1221,8 +1226,14 @@ static int mdss_dsi_event_handler(struct mdss_panel_data *pdata,
 			rc = mdss_dsi_blank(pdata);
 		rc = mdss_dsi_off(pdata);
 
+#if defined(CONFIG_LGE_MIPI_DZNY_JDI_INCELL_FHD_VIDEO_PANEL)
+        if(touch_driver_registered){
+            touch_notifier_call_chain(LCD_EVENT_TOUCH_LPWG_ON, NULL);
+        }
+#endif
 #ifdef CONFIG_STATE_NOTIFIER
-		state_suspend();
+		if (!use_fb_notifier)
+			state_suspend();
 #endif
 		break;
 	case MDSS_EVENT_CONT_SPLASH_FINISH:

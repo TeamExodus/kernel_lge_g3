@@ -1035,3 +1035,37 @@ source "drivers/input/touchscreen/gt9xx/Kconfig"
 source "drivers/input/touchscreen/g3/Kconfig"
 
 endif
+
+config TOUCHSCREEN_SYNAPTICS_G2
+	bool "LGE CORE with Synaptics for G2"
+	help
+	  This enables lge core with synaptics driver for g2
+
+if TOUCHSCREEN_SYNAPTICS_G2
+
+source "drivers/input/touchscreen/g2/Kconfig"
+
+endif
+
+config TOUCHSCREEN_SYNAPTICS_TIGERS
+	bool "LGE CORE with Synaptics for TIGERS"
+	help
+	  This enables lge core with synaptics driver for TIGERS
+
+if TOUCHSCREEN_SYNAPTICS_TIGERS
+
+source "drivers/input/touchscreen/g2/Kconfig"
+
+endif
+
+config WAKE_GESTURES
+	default y
+    bool "Wake Gestures"
+
+
+config STATE_NOTIFIER
+        bool "State Notifier"
+	depends on TOUCHSCREEN_SYNAPTICS_G2
+	default y
+
+endif
