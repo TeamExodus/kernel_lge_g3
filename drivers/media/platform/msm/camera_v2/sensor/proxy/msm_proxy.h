@@ -63,7 +63,6 @@ struct msm_proxy_ctrl_t {
 	uint32_t max_i2c_fail_thres;
 	uint32_t i2c_fail_cnt;
 	uint8_t proxy_cal;
-	uint32_t subdev_id;
 };
 
 #define MSM_PROXY_DEBUG
