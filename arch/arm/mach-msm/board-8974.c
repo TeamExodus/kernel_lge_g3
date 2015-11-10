@@ -50,6 +50,10 @@
 #include "modem_notifier.h"
 #include "platsmp.h"
 
+#ifdef CONFIG_CPU_FREQ_GOV_BADASS
+int set_two_phase_freq_badass(int cpufreq);
+int set_three_phase_freq_badass(int cpufreq);
+#endif
 
 static struct memtype_reserve msm8974_reserve_table[] __initdata = {
 	[MEMTYPE_SMI] = {
@@ -325,6 +329,10 @@ void __init msm8974_init(void)
 	regulator_has_full_constraints();
 	board_dt_populate(adata);
 	msm8974_add_drivers();
+#ifdef CONFIG_CPU_FREQ_GOV_BADASS
+	set_two_phase_freq_badass(CONFIG_CPU_FREQ_GOV_BADASS_SECOND_PHASE_FREQ);
+	set_three_phase_freq_badass(CONFIG_CPU_FREQ_GOV_BADASS_THIRD_PHASE_FREQ);
+#endif
 }
 
 void __init msm8974_init_very_early(void)
