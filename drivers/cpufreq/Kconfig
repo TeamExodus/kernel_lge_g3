@@ -132,6 +132,15 @@ config CPU_FREQ_DEFAULT_GOV_BADASS
 	bool "badass"
 	select CPU_FREQ_GOV_BADASS
 
+config CPU_FREQ_DEFAULT_GOV_DARKNESS
+	bool "darkness"
+	select CPU_FREQ_GOV_DARKNESS
+
+config CPU_FREQ_DEFAULT_GOV_NIGHTMARE
+	bool "nightmare"
+	select CPU_FREQ_GOV_NIGHTMARE
+	help
+
 config CPU_FREQ_DEFAULT_GOV_LIONHEART
     bool "lionheart"
     select CPU_FREQ_GOV_LIONHEART
@@ -331,6 +340,14 @@ config CPU_FREQ_GOV_BADASS_ALLOW_BYPASS
 	depends on CPU_FREQ_GOV_BADASS_2_PHASE
 	help
 	  'allow_bypass' - This driver adds a bypass to the phases
+
+config CPU_FREQ_GOV_DARKNESS
+	tristate "'darkness' cpufreq governor"
+	depends on CPU_FREQ
+
+config CPU_FREQ_GOV_NIGHTMARE
+	tristate "'nightmare' cpufreq governor"
+	depends on CPU_FREQ
 
 config CPU_FREQ_GOV_LIONHEART
     tristate "'lionheart' cpufreq governor"
