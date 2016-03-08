@@ -1604,24 +1604,6 @@ refind_writable:
 		goto refind_writable;
 	}
 	spin_unlock(&cifs_file_list_lock);
-
-	if (inv_file) {
-		rc = cifs_reopen_file(inv_file, false);
-		if (!rc)
-			return inv_file;
-		else {
-			spin_lock(&cifs_file_list_lock);
-			list_move_tail(&inv_file->flist,
-					&cifs_inode->openFileList);
-			spin_unlock(&cifs_file_list_lock);
-			cifsFileInfo_put(inv_file);
-			spin_lock(&cifs_file_list_lock);
-			++refind;
-			inv_file = NULL;
-			goto refind_writable;
-		}
-	}
-
 	return NULL;
 }
 
